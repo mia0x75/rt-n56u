@@ -1,0 +1,71 @@
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4613:3: warning: 'cfg' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(cfg, (UCHAR **)&cfg, wrq->u.data.length);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4641:3: warning: 'cfg' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(cfg, (UCHAR **)&cfg, wrq->u.data.length);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4667:3: warning: 'val' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(val, (UCHAR **)&val, wrq->u.data.length);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4690:3: warning: 'val' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(val, (UCHAR **)&val, wrq->u.data.length);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4715:3: warning: 'cfg' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(cfg, (UCHAR **)&cfg, wrq->u.data.length);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4743:3: warning: 'cfg' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(cfg, (UCHAR **)&cfg, wrq->u.data.length);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4771:3: warning: 'cfg' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(cfg, (UCHAR **)&cfg, wrq->u.data.length);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4799:3: warning: 'cfg' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(cfg, (UCHAR **)&cfg, wrq->u.data.length);
+   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/embedded/ap/ap_cfg.c:4991:3: warning: 'Buf' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   os_alloc_mem(Buf, (UCHAR **)&Buf, wrq->u.data.length);
+
+
+drivers/net/wireless/ralink/mt7615_ap/../mt7615/txpwr/single_sku.c:1839:85: warning: array subscript is below array bounds [-Warray-bounds]
+  cPowerOffset = (fgSE) ? (pAd->CommonCfg.cTxPowerCompBackup[ucBandIdx][ucRateOffset][ucNSS - 1]) : (pAd->CommonCfg.cTxPowerCompBackup[ucBandIdx][ucRateOffset][3]);
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~
+
+
+net/netfilter/nf_conntrack_rtsp.c: In function 'help':
+net/netfilter/nf_conntrack_rtsp.c:474:2: warning: enumeration value 'IP_CT_DIR_MAX' not handled in switch [-Wswitch]
+  switch (CTINFO2DIR(ctinfo)) {
+  ^~~~~
+
+
+
+./ldso/include/dl-syscall.h: In function '_dl_pread':
+./ldso/include/dl-syscall.h:169:69: warning: right shift count >= width of type [-Wshift-count-overflow]
+  return __syscall_pread(fd, buf, count, 0, __LONG_LONG_PAIR((offset >> 32), (offset & 0xffffffff)));
+                                                                     ^
+./include/endian.h:52:39: note: in definition of macro '__LONG_LONG_PAIR'
+ # define __LONG_LONG_PAIR(HI, LO) LO, HI
+                                       ^~
+In file included from ldso/ldso/ldso.c:45:0:
+ldso/ldso/mips/elfinterp.c: In function '_dl_parse_relocation_information':
+ldso/ldso/mips/elfinterp.c:234:8: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+        if (!tls_tpnt)
+        ^~
+ldso/ldso/mips/elfinterp.c:237:5: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+     switch (reloc_type) {
+     ^~~~~~
+In file included from ldso/ldso/ldso.c:86:0:
+ldso/ldso/dl-startup.c: In function '_dl_start':
+ldso/ldso/dl-startup.c:313:13: warning: variable 'strtab' set but not used [-Wunused-but-set-variable]
+       char *strtab;
+             ^~~~~~
+
+
+
+In file included from libc/misc/fnmatch/fnmatch.c:235:0:
+libc/misc/fnmatch/fnmatch_loop.c: In function 'internal_fnmatch':
+libc/misc/fnmatch/fnmatch_loop.c:207:21: warning: initialization discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+      CHAR *p_init = p;
+                     ^
+libc/misc/fnmatch/fnmatch_loop.c:208:21: warning: initialization discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+      CHAR *n_init = n;
+                     ^
