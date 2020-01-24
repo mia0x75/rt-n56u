@@ -540,7 +540,7 @@ struct nvram_pair router_defaults[] = {
 	{ "dns_forwarder_bind", "0.0.0.0" },
 	{ "dns_forwarder_server", "8.8.4.4:53" },
 	
-	/* shadowsocks */
+	/* TODO: trojan */
 	{ "ss_type", "0" }, //0=ss, 1=ssr
 	{ "global_server", "nil" },
 	{ "backup_server", "nil" },

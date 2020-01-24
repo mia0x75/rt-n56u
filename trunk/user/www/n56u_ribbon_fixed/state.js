@@ -394,7 +394,7 @@ if (found_app_scutclient()){
 if (found_app_dnsforwarder()){
 	tabtitle[11] = new Array("", "<#menu5_1_1#>");
 }
-if (found_app_shadowsocks()){
+if (found_app_trojan()){
 	tabtitle[12] = new Array("", "<#menu5_1_1#>","<#menu5_16_20#>");
 }
 if (found_app_mentohust()){
@@ -416,21 +416,13 @@ tablink[6] = new Array("", "Advanced_System_Content.asp", "Advanced_Services_Con
 tablink[7] = new Array("", "Advanced_Tweaks_Content.asp", "Advanced_Scripts_Content.asp", "Advanced_InetDetect_Content.asp" ,"Advanced_web.asp");
 tablink[8] = new Array("", "Main_WStatus2g_Content.asp", "Main_WStatus_Content.asp", "", "", "", "", "", "", "", "");
 tablink[9] = new Array("", "Main_LogStatus_Content.asp", "Main_DHCPStatus_Content.asp", "Main_IPTStatus_Content.asp", "Main_RouteStatus_Content.asp", "Main_CTStatus_Content.asp");
-if (found_app_scutclient()){
-	scutclient_array = new Array("", "scutclient.asp", "scutclient_log.asp");
-	tablink[10] = (scutclient_array);
-}
 if (found_app_dnsforwarder()){
 	dns_forwarder_array = new Array("", "dns-forwarder.asp");
 	tablink[11] = (dns_forwarder_array);
 }
-if (found_app_shadowsocks()){
-	shadowsocks_array = new Array("","Shadowsocks.asp","Shadowsocks_log.asp");
-	tablink[12] = (shadowsocks_array);
-}
-if (found_app_mentohust()){
-	mentohust_array = new Array("","mentohust.asp","mentohust_log.asp");
-	tablink[13] = (mentohust_array);
+if (found_app_trojan()){
+	trojan_array = new Array("","Trojan.asp","Trojan_log.asp");
+	tablink[12] = (trojan_array);
 }
 if (found_app_smartdns()){
 	smartdns_array = new Array("","Advanced_smartdns.asp");
@@ -448,7 +440,7 @@ if (found_app_dnsforwarder()){
 	menuL2_title.push("<#menu5_15#>");
 } else menuL2_title.push("");
 
-if (found_app_shadowsocks()){
+if (found_app_trojan()){
 	menuL2_title.push("<#menu5_16#>");
 } else menuL2_title.push("");
 
@@ -468,8 +460,8 @@ if (found_app_dnsforwarder()){
 	menuL2_link.push(dns_forwarder_array[1]);
 } else menuL2_link.push("");
 
-if (found_app_shadowsocks()){
-	menuL2_link.push(shadowsocks_array[1]);
+if (found_app_trojan()){
+	menuL2_link.push(trojan_array[1]);
 } else menuL2_link.push("");
 
 if (found_app_mentohust()){

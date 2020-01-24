@@ -19,10 +19,10 @@
 <script type="text/javascript" src="/popup.js"></script>
 <script type="text/javascript" src="/help.js"></script>
 <script>
-<% shadowsocks_status(); %>
+<% trojan_status(); %>
 <% pdnsd_status(); %>
 <% rules_count(); %>
-var m_rules = [<% get_nvram_list("ShadowsocksConf", "SspList"); %>];
+var m_rules = [<% get_nvram_list("TrojanConf", "SspList"); %>];
 var mrules_ifield = 17;
 if(m_rules.length > 0){
 	var m_rules_ifield = m_rules[0].length;
@@ -53,8 +53,8 @@ function initial(){
 	show_banner(2);
 	show_menu(13,13,0);
 	show_footer();
-	fill_ss_status(shadowsocks_status());
-	fill_ss_check_status(shadowsocks_check_status());
+	fill_ss_status(trojan_status());
+	fill_ss_check_status(trojan_check_status());
 	fill_pd_status(pdnsd_status());
 	$("chnroute_count").innerHTML = '<#menu5_17_3#>' + chnroute_count() ;
 	$("gfwlist_count").innerHTML = '<#menu5_17_3#>' + gfwlist_count() ;
@@ -142,121 +142,19 @@ if (b=="v2ray"){
 }
 }
 function switch_v2_type(){
-var b = document.form.v2_net_x_0.value; //0:ss-orig;1:ssr
-if (b=="tcp"){
-	var v=0;
-	showhide_div('row_v2_type_tcp', 1);
-	showhide_div('row_v2_type', 1);
-	showhide_div('row_v2_type_mkcp', v);
-	showhide_div('row_v2_mkcp_mtu', v);
-	showhide_div('row_v2_mkcp_tti', v);
-	showhide_div('row_v2_mkcp_uplink', v);
-	showhide_div('row_v2_mkcp_downlink', v);
-	showhide_div('row_v2_mkcp_readbu', v);
-	showhide_div('row_v2_mkcp_writebu', v);
-	showhide_div('row_v2_mkcp_congestion', v);
-	showhide_div('row_v2_webs_host', v);
-	showhide_div('row_v2_webs_path', v);
-	showhide_div('row_v2_http2_host', v);
-	showhide_div('row_v2_http2_path', v);
-	showhide_div('row_quic_security', v);
-	showhide_div('row_quic_key', v);
-	showhide_div('row_quic_header', v)
-}
-if (b=="kcp"){
-	var v=0;
-	var k=1;
-	showhide_div('row_v2_type_tcp', v);
-	showhide_div('row_v2_type', k);
-	showhide_div('row_v2_type_mkcp', k);
-	showhide_div('row_v2_mkcp_mtu', k);
-	showhide_div('row_v2_mkcp_tti', k);
-	showhide_div('row_v2_mkcp_uplink', k);
-	showhide_div('row_v2_mkcp_downlink', k);
-	showhide_div('row_v2_mkcp_readbu', k);
-	showhide_div('row_v2_mkcp_writebu', k);
-	showhide_div('row_v2_mkcp_congestion', k);
-	showhide_div('row_v2_webs_host', v);
-	showhide_div('row_v2_webs_path', v);
-	showhide_div('row_v2_http2_host', v);
-	showhide_div('row_v2_http2_path', v);
-	showhide_div('row_quic_security', v);
-	showhide_div('row_quic_key', v);
-	showhide_div('row_quic_header', v)
-}
-if (b=="ws"){
-	var v=0;
-	var k=1;
-	showhide_div('row_v2_type_tcp', v);
-	showhide_div('row_v2_type', v);
-	showhide_div('row_v2_mkcp_mtu', v);
-	showhide_div('row_v2_mkcp_tti', v);
-	showhide_div('row_v2_mkcp_uplink', v);
-	showhide_div('row_v2_mkcp_downlink', v);
-	showhide_div('row_v2_mkcp_readbu', v);
-	showhide_div('row_v2_mkcp_writebu', v);
-	showhide_div('row_v2_mkcp_congestion', v);
-	showhide_div('row_v2_webs_host', k);
-	showhide_div('row_v2_webs_path', k);
-	showhide_div('row_v2_http2_host', v);
-	showhide_div('row_v2_http2_path', v);
-	showhide_div('row_quic_security', v);
-	showhide_div('row_quic_key', v);
-	showhide_div('row_quic_header', v)
-}
-if (b=="h2"){
-	var v=0;
-	var k=1;
-	showhide_div('row_v2_type_tcp', v);
-	showhide_div('row_v2_type', v);
-	showhide_div('row_v2_mkcp_mtu', v);
-	showhide_div('row_v2_mkcp_tti', v);
-	showhide_div('row_v2_mkcp_uplink', v);
-	showhide_div('row_v2_mkcp_downlink', v);
-	showhide_div('row_v2_mkcp_readbu', v);
-	showhide_div('row_v2_mkcp_writebu', v);
-	showhide_div('row_v2_mkcp_congestion', v);
-	showhide_div('row_v2_webs_host', v);
-	showhide_div('row_v2_webs_path', v);
-	showhide_div('row_v2_http2_host', k);
-	showhide_div('row_v2_http2_path', k);
-	showhide_div('row_quic_security', v);
-	showhide_div('row_quic_key', v);
-	showhide_div('row_quic_header', v)
-}
-if (b=="quic"){
-	var v=0;
-	var k=1;
-	showhide_div('row_v2_type_tcp', v);
-	showhide_div('row_v2_type', v);
-	showhide_div('row_v2_mkcp_mtu', v);
-	showhide_div('row_v2_mkcp_tti', v);
-	showhide_div('row_v2_mkcp_uplink', v);
-	showhide_div('row_v2_mkcp_downlink', v);
-	showhide_div('row_v2_mkcp_readbu', v);
-	showhide_div('row_v2_mkcp_writebu', v);
-	showhide_div('row_v2_mkcp_congestion', v);
-	showhide_div('row_v2_webs_host', v);
-	showhide_div('row_v2_webs_path', v);
-	showhide_div('row_v2_http2_host', v);
-	showhide_div('row_v2_http2_path', v);
-	showhide_div('row_quic_security', k);
-	showhide_div('row_quic_key', k);
-	showhide_div('row_quic_header', k);
-}
 }
 function applyRule(){
 	showLoading();
 	document.form.action_mode.value = " Restart ";
-	document.form.current_page.value = "Shadowsocks.asp";
+	document.form.current_page.value = "Trojan.asp";
 	document.form.next_page.value = "";
 	document.form.submit();
 }
 function submitInternet(v){
 	showLoading();
-	document.Shadowsocks_action.action = "Shadowsocks_action.asp";
-	document.Shadowsocks_action.connect_action.value = v;
-	document.Shadowsocks_action.submit();
+	document.Trojan_action.action = "Trojan_action.asp";
+	document.Trojan_action.connect_action.value = v;
+	document.Trojan_action.submit();
 }
 function change_ss_watchcat_display(){
 	var v = document.form.ss_router_proxy[0].checked;
@@ -432,7 +330,6 @@ function import_ssr_url(btn, urlname, sid) {
 		return false;
 	}
 	s.innerHTML = "";
-//var ssu = ssrurl.match(/ssr:\/\/([A-Za-z0-9_-]+)/i);
 var ssu = ssrurl.split('://');
 console.log(ssu.length);
 if ((ssu[0] != "ssr" && ssu[0] != "ss" && ssu[0] != "vmess") || ssu[1] == "") {
@@ -442,97 +339,10 @@ if ((ssu[0] != "ssr" && ssu[0] != "ss" && ssu[0] != "vmess") || ssu[1] == "") {
 var event = document.createEvent("HTMLEvents");
 event.initEvent("change", true, true);
 if (ssu[0] == "ssr") {
-	var sstr = b64decsafe(ssu[1]);
-	var ploc = sstr.indexOf("/?");
-	document.getElementById('ssp_type_x_0').value = "ssr";
-	document.getElementById('ssp_type_x_0').dispatchEvent(event);
-	var url0, param = "";
-	if (ploc > 0) {
-		url0 = sstr.substr(0, ploc);
-		param = sstr.substr(ploc + 2);
-	}
-	var ssm = url0.match(/^(.+):([^:]+):([^:]*):([^:]+):([^:]*):([^:]+)/);
-	if (!ssm || ssm.length < 7)
-		return false;
-	var pdict = {};
-	if (param.length > 2)
-	{
-		var a = param.split('&');
-		for (var i = 0; i < a.length; i++) {
-			var b = a[i].split('=');
-			pdict[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
-		}
-	}
-	document.getElementById('ssp_server_x_0').value = ssm[1];
-	document.getElementById('ssp_prot_x_0').value = ssm[2];
-	document.getElementById('ss_protocol_x_0').value = ssm[3];
-	document.getElementById('ss_method_x_0').value = ssm[4];
-	document.getElementById('ss_obfs_x_0').value = ssm[5];
-	document.getElementById('ss_key').value = b64decsafe(ssm[6]);
-	document.getElementById('ss_obfs_param_x_0').value = dictvalue(pdict, 'obfsparam');
-	document.getElementById('ss_proto_param_x_0').value = dictvalue(pdict, 'protoparam');
-	var rem = pdict['remarks'];
-	if (typeof (rem) != 'undefined' && rem != '' && rem.length > 0)
-		document.getElementById('ssp_name_x_0').value = b64decutf8safe(rem);
-	s.innerHTML = "<font color='green'>导入ShadowsocksR配置信息成功</font>";
 	return false;
 } else if (ssu[0] == "ss") {
-	var ploc = ssu[1].indexOf("#");
-	if (ploc > 0) {
-		url0 = ssu[1].substr(0, ploc);
-		param = ssu[1].substr(ploc + 1);
-	} else {
-		url0 = ssu[1]
-	}
-	var sstr = b64decsafe(url0);
-	document.getElementById('ssp_type_x_0').value = "ss";
-	document.getElementById('ssp_type_x_0').dispatchEvent(event);
-	var team = sstr.split('@');
-	console.log(param);
-	var part1 = team[0].split(':');
-	var part2 = team[1].split(':');
-	document.getElementById('ssp_server_x_0').value = part2[0];
-	document.getElementById('ssp_prot_x_0').value = part2[1];
-	document.getElementById('ss_key').value = part1[1];
-	document.getElementById('ss_method_x_0').value = part1[0];
-	if (param != undefined) {
-		document.getElementById('ssp_name_x_0').value = decodeURI(param);
-	}
-	s.innerHTML = "<font color='green'>导入Shadowsocks配置信息成功</font>";
 	return false;
 } else if (ssu[0] == "vmess") {
-	var sstr = b64DecodeUnicode(ssu[1]);
-	console.log(sstr);
-	var ploc = sstr.indexOf("/?");
-	document.getElementById('ssp_type_x_0').value = "v2ray";
-	document.getElementById('ssp_type_x_0').dispatchEvent(event);
-	var url0, param = "";
-	if (ploc > 0) {
-		url0 = sstr.substr(0, ploc);
-		param = sstr.substr(ploc + 2);
-	}
-	var ssm = JSON.parse(sstr);
-	document.getElementById('ssp_name_x_0').value = ssm.ps;
-	document.getElementById('ssp_server_x_0').value = ssm.add;
-	document.getElementById('ssp_prot_x_0').value = ssm.port;
-	document.getElementById('v2_aid_x_0').value = ssm.aid;
-	document.getElementById('v2_vid_x_0').value = ssm.id;
-	if (ssm.type == "tcp" ) {
-		document.getElementById('row_v2_type_tcp').value = ssm.type;
-	}else{
-		document.getElementById('row_v2_type_mkcp').value = ssm.type;
-	}
-	document.getElementById('v2_net_x_0').value = ssm.net;
-	document.getElementById('v2_net_x_0').dispatchEvent(event);
-	if (ssm.net == "ws" ) {
-		document.getElementById('v2_webs_host_x_0').value = ssm.host;
-		document.getElementById('v2_webs_path_x_0').value = ssm.path;
-	}
-	if (ssm.net == "h2" ) {
-		document.getElementById('v2_http2_host_x_0').value = ssm.host;
-		document.getElementById('v2_http2_path_x_0').value = ssm.path;
-	}
-	s.innerHTML = "<font color='green'>导入V2ray配置信息成功</font>";
 	return false;
 }
 }
@@ -557,10 +367,10 @@ if (ssu[0] == "ssr") {
 <div id="Loading" class="popup_bg"></div>
 <iframe name="hidden_frame" id="hidden_frame" src="" width="0" height="0" frameborder="0"></iframe>
 <form method="post" name="form" id="ruleForm" action="/start_apply.htm" target="hidden_frame">
-<input type="hidden" name="current_page" value="Shadowsocks.asp">
+<input type="hidden" name="current_page" value="Trojan.asp">
 <input type="hidden" name="next_page" value="">
 <input type="hidden" name="next_host" value="">
-<input type="hidden" name="sid_list" value="ShadowsocksConf;">
+<input type="hidden" name="sid_list" value="TrojanConf;">
 <input type="hidden" name="group_id" value="SspList">
 <input type="hidden" name="action_mode" value="">
 <input type="hidden" name="action_script" value="">
@@ -606,7 +416,7 @@ if (ssu[0] == "ssr") {
 					</div>
 <div class="row-fluid">
 	<div id="tabMenu" class="submenuBlock"></div>
-	<div class="alert alert-info" style="margin: 10px;">一个兼容Shadowsocks、ShadowsocksR 、Vmess等协议的游戏加速工具。</div>
+	<div class="alert alert-info" style="margin: 10px;">一个兼容Trojan、TrojanR 、Vmess等协议的游戏加速工具。</div>
 	<div id="wnd_ss_cfg">
 		<table width="100%" cellpadding="4" cellspacing="0" class="table">
 			<tr> <th>当前运行服务器</th>
@@ -746,8 +556,6 @@ if (ssu[0] == "ssr") {
 			<tr> <th width="50%">服务器节点类型</th>
 				<td>
 					<select name="ssp_type_x_0" id="ssp_type_x_0" class="input" style="width: 200px;" onchange="switch_ss_type()">
-						<option value="ss" >SS</option>
-						<option value="ssr" >SSR</option>
 						<option value="v2ray" >V2ray</option>
 					</select>
 				</td>
@@ -773,219 +581,9 @@ if (ssu[0] == "ssr") {
 					<button style="margin-left: -5px;" class="btn" type="button" onclick="passwordShowHide('ss_key')"><i class="icon-eye-close"></i></button>
 				</td>
 			</tr>	
-			<tr id="row_v2_aid" style="display:none;"> <th width="50%">AlterId</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_aid_x_0" id="v2_aid_x_0" style="width: 200px" value="<% nvram_get_x("","v2_aid_x_0"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_vid" style="display:none;"> <th width="50%">VmessId (UUID)</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_vid_x_0" id="v2_vid_x_0" style="width: 200px" value="<% nvram_get_x("","v2_vid_x_0"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_security" style="display:none;"><th width="50%">加密</th>
-				<td>
-					<select name="v2_security_x_0" id="v2_security_x_0" class="input" style="width: 200px;">   
-						<option value="auto" >AUTO</option>
-						<option value="none" >NONE</option>
-						<option value="aes-128-gcm" >AES-128-GCM</option>
-						<option value="chacha20-poly1305" >CHACHA20-POLY1305</option>
-					</select>
-				</td>
-			</tr>
-			<tr id="row_v2_net" style="display:none;"> <th width="50%">传输方式</th>
-				<td>
-					<select name="v2_net_x_0" id="v2_net_x_0" class="input" style="width: 200px;" onchange="switch_v2_type()">   
-						<option value="tcp" >TCP</option>
-						<option value="kcp" >mKCP</option>
-						<option value="ws" >WebSocket</option>
-						<option value="h2" >HTTP/2</option>
-						<option value="quic" >QUIC</option>
-					</select>
-				</td>
-			</tr>
-			<tr id="row_v2_type" style="display:none;"> <th width="50%">伪装类型</th>
-				<td>
-					<select id="row_v2_type_tcp" name="v2_type_tcp_x_0" class="input" style="width: 200px;display:none;">   
-						<option value="none" >未配置</option>
-						<option value="http" >HTTP</option>
-					</select>
-					<select id="row_v2_type_mkcp" name="v2_type_mkcp_x_0" class="input" style="width: 200px;display:none;"> 
-						<option value="none" >未配置</option>												
-						<option value="srtp" >VideoCall (SRTP)</option>
-						<option value="utp" >BitTorrent (uTP)</option>
-						<option value="wechat-video" >WechatVideo</option>
-						<option value="dtls" >DTLS 1.2</option>
-						<option value="wireguard" >WireGuard</option>
-					</select>
-				</td>
-			</tr>
-			<tr id="row_v2_mkcp_mtu" style="display:none;"> <th width="50%">MTU</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_mkcp_mtu_x_0" style="width: 200px" value="<% nvram_get_x("","v2_mkcp_mtu"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_mkcp_tti" style="display:none;"> <th width="50%">TTI</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_mkcp_tti_x_0" style="width: 200px" value="<% nvram_get_x("","v2_mkcp_tti"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_mkcp_uplink" style="display:none;"> <th width="50%">Uplink Capacity</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_mkcp_uplink_x_0" style="width: 200px" value="<% nvram_get_x("","v2_mkcp_uplink"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_mkcp_downlink" style="display:none;"> <th width="50%">Downlink Capacity</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_mkcp_downlink_x_0" style="width: 200px" value="<% nvram_get_x("","v2_mkcp_downlink"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_mkcp_readbu" style="display:none;"> <th width="50%">Read Buffer Size</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_mkcp_readbu_x_0" style="width: 200px" value="<% nvram_get_x("","v2_mkcp_readbu"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_mkcp_writebu" style="display:none;"> <th width="50%">Write Buffer Size</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_mkcp_writebu_x_0" style="width: 200px" value="<% nvram_get_x("","v2_mkcp_writebu"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_mkcp_congestion" style="display:none;"><th>Congestion</th>
-				<td>
-					<div class="main_itoggle">
-						<div id="v2_mkcp_congestion_x_0_on_of">
-							<input type="checkbox" id="v2_mkcp_congestion_x_0_fake" <% nvram_match_x("", "v2_mkcp_congestion", "1", "value=1 checked"); %><% nvram_match_x("", "v2_mkcp_congestion", "0", "value=0"); %>>
-						</div>
-					</div>
-					<div style="position: absolute; margin-left: -10000px;">
-						<input type="radio" value="1" name="v2_mkcp_congestion_x_0" id="v2_tls_1" <% nvram_match_x("", "v2_mkcp_congestion", "1", "checked"); %>><#checkbox_Yes#>
-						<input type="radio" value="0" name="v2_mkcp_congestion_x_0" id="v2_tls_0" <% nvram_match_x("", "v2_mkcp_congestion", "0", "checked"); %>><#checkbox_No#>
-					</div>
-				</td>
-			</tr>
-			<tr id="row_v2_webs_host" style="display:none;"> <th width="50%">WebSocket Host</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_webs_host_x_0" id="v2_webs_host_x_0" style="width: 200px" value="<% nvram_get_x("","v2_webs_host"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_webs_path" style="display:none;"> <th width="50%">WebSocket Path</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_webs_path_x_0" id="v2_webs_path_x_0" style="width: 200px" value="<% nvram_get_x("","v2_webs_path"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_http2_host" style="display:none;"> <th width="50%">HTTP/2 Host</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_http2_host_x_0" id="v2_http2_host_x_0" style="width: 200px" value="<% nvram_get_x("","v2_http2_host"); %>" />
-				</td>
-			</tr>
-			<tr id="row_v2_http2_path" style="display:none;"> <th width="50%">HTTP/2 Path</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_http2_path_x_0" id="v2_http2_path_x_0" style="width: 200px" value="<% nvram_get_x("","v2_https_path"); %>" />
-				</td>
-			</tr>
-			<tr id="row_quic_security" style="display:none;"> <th width="50%">QUIC Security</th>
-				<td>
-					<select name="v2_quic_security_x_0" class="input" style="width: 200px;">   
-						<option value="none" >未配置</option>
-						<option value="aes-128-gcm" >aes-128-gcm</option>
-						<option value="chacha20-ietf-poly1305" >chacha20-ietf-poly1305</option>
-					</select>
-				</td>
-			</tr>
-			<tr id="row_quic_key" style="display:none;"> <th width="50%">QUIC Key</th>
-				<td>
-					<input type="text" class="input" size="15" name="v2_quic_key_x_0" style="width: 200px" value="<% nvram_get_x("","v2_quic_key"); %>" />
-				</td>
-			</tr>
-			<tr id="row_quic_header" style="display:none;"> <th width="50%">Header</th>
-				<td>
-					<select name="v2_quic_header_x_0" class="input" style="width: 200px;"> 
-						<option value="none" >未配置</option>												
-						<option value="srtp" >VideoCall (SRTP)</option>
-						<option value="utp" >BitTorrent (uTP)</option>
-						<option value="wechat-video" >WechatVideo</option>
-						<option value="dtls" >DTLS 1.2</option>
-						<option value="wireguard" >WireGuard</option>
-					</select>
-				</td>
-			</tr>
-			<tr id="row_v2_tls" style="display:none;"><th>TLS</th>
-				<td>
-					<div class="main_itoggle">
-						<div id="v2_tls_x_0_on_of">
-							<input type="checkbox" id="v2_tls_x_0_fake" <% nvram_match_x("", "v2_tls", "1", "value=1 checked"); %><% nvram_match_x("", "v2_tls", "0", "value=0"); %>>
-						</div>
-					</div>
-					<div style="position: absolute; margin-left: -10000px;">
-						<input type="radio" value="1" name="v2_tls_x_0" id="v2_tls_x_0_1" <% nvram_match_x("", "v2_tls", "1", "checked"); %>><#checkbox_Yes#>
-						<input type="radio" value="0" name="v2_tls_x_0" id="v2_tls_x_0_0" <% nvram_match_x("", "v2_tls", "0", "checked"); %>><#checkbox_No#>
-					</div>
-				</td>
-			</tr>
-			<tr id="row_ss_method" style="display:none;">  <th width="50%">加密方式</th>
-				<td>
-					<select name="ss_method_x_0" id="ss_method_x_0" class="input" style="width: 200px;">
-						<option value="none" >none (ssr only)</option>
-						<option value="rc4" >rc4</option>
-						<option value="rc4-md5" >rc4-md5</option>
-						<option value="aes-128-cfb" >aes-128-cfb</option>
-						<option value="aes-192-cfb" >aes-192-cfb</option>
-						<option value="aes-256-cfb" >aes-256-cfb</option>
-						<option value="aes-128-ctr" >aes-128-ctr</option>
-						<option value="aes-192-ctr" >aes-192-ctr</option>
-						<option value="aes-256-ctr" >aes-256-ctr</option>
-						<option value="camellia-128-cfb" >camellia-128-cfb</option>
-						<option value="camellia-192-cfb" >camellia-192-cfb</option>
-						<option value="camellia-256-cfb" >camellia-256-cfb</option>
-						<option value="bf-cfb" >bf-cfb</option>
-						<option value="salsa20" >salsa20</option>
-						<option value="chacha20" >chacha20</option>
-						<option value="chacha20-ietf" >chacha20-ietf</option>
-						<option value="aes-128-gcm" >aes-128-gcm (ss only)</option>
-						<option value="aes-192-gcm" >aes-192-gcm (ss only)</option>
-						<option value="aes-256-gcm" >aes-256-gcm (ss only)</option>
-						<option value="chacha20-ietf-poly1305" >chacha20-ietf-poly1305 (ss only)</option>
-						<option value="xchacha20-ietf-poly1305" >xchacha20-ietf-poly1305 (ss only)</option>
-					</select>
-				</td>
-			</tr>
 			<tr> <th width="50%"><#menu5_16_21#></th>
 				<td>
 					<input type="text" class="input" size="15" name="ss_timeout" style="width: 200px" value="<% nvram_get_x("","ss_timeout"); %>" />
-				</td>
-			</tr>
-			<tr id="row_ss_protocol" style="display:none;"> <th width="50%">协议</th>
-				<td>
-					<select name="ss_protocol_x_0" id="ss_protocol_x_0" class="input" style="width: 200px;">   
-						<option value="origin" >origin</option>
-						<option value="auth_sha1" >auth_sha1</option>
-						<option value="auth_sha1_v2" >auth_sha1_v2</option>
-						<option value="auth_sha1_v4" >auth_sha1_v4</option>
-						<option value="auth_aes128_md5" >auth_aes128_md5</option>
-						<option value="auth_aes128_sha1" >auth_aes128_sha1</option>
-						<option value="auth_chain_a" >auth_chain_a</option>
-						<option value="auth_chain_b" >auth_chain_b</option>
-					</select>
-				</td>
-			</tr>
-			<tr id="row_ss_protocol_para" style="display:none;"> <th width="50%">传输协议参数（可选）</th>
-				<td>
-					<input type="text" class="input" size="15" name="ss_proto_param_x_0" id="ss_proto_param_x_0" value="<% nvram_get_x("","ss_proto_param_x_0"); %>" />
-				</td>
-			</tr>
-			<tr id="row_ss_obfs" style="display:none;"> <th width="50%">混淆</th>
-				<td>
-					<select name="ss_obfs_x_0" id="ss_obfs_x_0" class="input" style="width: 200px;">   
-						<option value="plain" >plain</option>
-						<option value="http_simple" >http_simple</option>
-						<option value="http_post" >http_post</option>
-						<option value="tls1.2_ticket_auth" >tls1.2_ticket_auth</option>
-					</select>
-				</td>
-			</tr>
-			<tr id="row_ss_obfs_para" style="display:none;"> <th width="50%">混淆参数（可选）</th>
-				<td>
-					<input type="text" class="input" size="15" name="ss_obfs_param_x_0" id="ss_obfs_param_x_0" style="width: 200px" value="<% nvram_get_x("","ss_obfs_param_x_0"); %>" />
 				</td>
 			</tr>
 			<tr> <th width="50%">本地端口</th>
@@ -993,19 +591,6 @@ if (ssu[0] == "ssr") {
 					<input type="text" maxlength="6" class="input" size="15" name="ssp_local_port_x_0" style="width: 200px" value="1080">
 				</td>
 			</tr>
-<!--<tr> <th>自动切换</th>
-<td>
-<div class="main_itoggle">
-<div id="switch_enable_x_0_on_of">
-<input type="checkbox" id="switch_enable_x_0_fake" <% nvram_match_x("", "switch_enable_x_0", "1", "value=1 checked"); %><% nvram_match_x("", "switch_enable_x_0", "0", "value=0"); %>>
-</div>
-</div>
-<div style="position: absolute; margin-left: -10000px;">
-<input type="radio" value="1" name="switch_enable_x_0" id="switch_enable_x_0_1" <% nvram_match_x("", "switch_enable_x_0", "1", "checked"); %>><#checkbox_Yes#>
-<input type="radio" value="0" name="switch_enable_x_0" id="switch_enable_x_0_0" <% nvram_match_x("", "switch_enable_x_0", "0", "checked"); %>><#checkbox_No#>
-</div>
-</td>
-</tr>-->
 </table>
 <table width="100%" align="center" cellpadding="3" cellspacing="0" class="table">
 	<tr id="row_rules_caption">
@@ -1218,7 +803,7 @@ if (ssu[0] == "ssr") {
 </form>
 <div id="footer"></div>
 </div>
-<form method="post" name="Shadowsocks_action" action="">
+<form method="post" name="Trojan_action" action="">
 	<input type="hidden" name="connect_action" value="">
 </form>
 </body>

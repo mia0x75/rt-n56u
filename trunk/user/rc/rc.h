@@ -508,7 +508,7 @@ void stop_ttyd(void);
 void start_ttyd(void);
 void restart_ttyd(void);
 #endif
-#if defined(APP_SHADOWSOCKS)
+#if defined(APP_TROJAN)
 void stop_ss(void);
 void start_ss(void);
 void restart_ss(void);

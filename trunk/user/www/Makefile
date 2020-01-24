@@ -172,11 +172,6 @@ endif
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER),y)
 	rm -f $(INSTALLDIR)/www/dns-forwarder.asp
 endif
-ifneq ($(CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS),y)
-	rm -f $(INSTALLDIR)/www/Shadowsocks.asp
-	rm -f $(INSTALLDIR)/www/Shadowsocks_action.asp
-	rm -f $(INSTALLDIR)/www/Shadowsocks_log.asp
-endif
 ifeq ($(CONFIG_FIRMWARE_WEBUI_HIDE_VPN),y)
 	rm -f $(INSTALLDIR)/www/vpn_clients.asp
 	rm -f $(INSTALLDIR)/www/vpncli.asp

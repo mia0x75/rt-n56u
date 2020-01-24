@@ -51,7 +51,7 @@ function initial(){
 	if (!login_safe())
 		textarea_scripts_enabled(0);
 		//load_body();
-	if (found_app_shadowsocks()){
+	if (found_app_trojan()){
 	showhide_div('row_wss', true);
 }
 if (found_app_scutclient()){

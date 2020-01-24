@@ -1921,14 +1921,14 @@ static int mentohust_status_hook(int eid, webs_t wp, int argc, char **argv)
 }
 #endif
 
-#if defined (APP_SHADOWSOCKS)
-static int shadowsocks_action_hook(int eid, webs_t wp, int argc, char **argv)
+#if defined (APP_TROJAN)
+static int trojan_action_hook(int eid, webs_t wp, int argc, char **argv)
 {
 	int needed_seconds = 3;
 	char *ss_action = websGetVar(wp, "connect_action", "");
 
 	if (!strcmp(ss_action, "Reconnect")) {
-		notify_rc(RCN_RESTART_SHADOWSOCKS);
+		notify_rc(RCN_RESTART_TROJAN);
 	} else if (!strcmp(ss_action, "Update_chnroute")) {
 		notify_rc(RCN_RESTART_CHNROUTE_UPD);
 		needed_seconds = 1;
@@ -1941,7 +1941,7 @@ static int shadowsocks_action_hook(int eid, webs_t wp, int argc, char **argv)
 	return 0;
 }
 
-static int shadowsocks_status_hook(int eid, webs_t wp, int argc, char **argv)
+static int trojan_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
 	int ss_status_code = pids("ss-redir");
 	if (ss_status_code == 0){
@@ -1950,16 +1950,16 @@ static int shadowsocks_status_hook(int eid, webs_t wp, int argc, char **argv)
 	if (ss_status_code == 0){
 		ss_status_code = pids("v2ray");
 	}
-	websWrite(wp, "function shadowsocks_status() { return %d;}\n", ss_status_code);
+	websWrite(wp, "function trojan_status() { return %d;}\n", ss_status_code);
 	int ss_tunnel_status_code = pids("ss-local");
-	websWrite(wp, "function shadowsocks_tunnel_status() { return %d;}\n", ss_tunnel_status_code);
+	websWrite(wp, "function trojan_tunnel_status() { return %d;}\n", ss_tunnel_status_code);
 	int ss_mode = nvram_get_int("ss_enable");
 	int ss_check_code = 2;
 	if ( ss_mode == 1)
 	{
 	ss_check_code = nvram_get_int("check_mode");
 	}
-	websWrite(wp, "function shadowsocks_check_status() { return %d;}\n", ss_check_code);
+	websWrite(wp, "function trojan_check_status() { return %d;}\n", ss_check_code);
 	return 0;
 }
 
@@ -1978,7 +1978,7 @@ static int rules_count_hook(int eid, webs_t wp, int argc, char **argv)
 	if (strlen(count) > 0)
 		count[strlen(count) - 1] = 0;
 	websWrite(wp, "function chnroute_count() { return '%s';}\n", count);
-#if defined(APP_SHADOWSOCKS)
+#if defined(APP_TROJAN)
 	memset(count, 0, sizeof(count));
 	fstream = popen("grep ^ipset /etc/gfwlist/gfwlist_list.conf |wc -l","r");
 	if(fstream) {
@@ -2006,7 +2006,7 @@ static int dnsforwarder_status_hook(int eid, webs_t wp, int argc, char **argv)
 #endif
 
 
-#if defined (APP_SHADOWSOCKS)
+#if defined (APP_TROJAN)
 static int pdnsd_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
 	int pdnsd_status_code = pids("pdnsd");
@@ -2213,10 +2213,10 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int found_app_napt66 = 0;
 #endif
-#if defined(APP_SHADOWSOCKS)
-	int found_app_shadowsocks = 1;
+#if defined(APP_TROJAN)
+	int found_app_trojan = 1;
 #else
-	int found_app_shadowsocks = 0;
+	int found_app_trojan = 0;
 #endif
 #if defined(APP_SMARTDNS)
 	int found_app_smartdns = 1;
@@ -2398,7 +2398,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		"function found_app_vlmcsd() { return %d;}\n"
 		"function found_app_napt66() { return %d;}\n"
 		"function found_app_dnsforwarder() { return %d;}\n"
-		"function found_app_shadowsocks() { return %d;}\n"
+		"function found_app_trojan() { return %d;}\n"
 		"function found_app_smartdns() { return %d;}\n"
 		"function found_app_frp() { return %d;}\n"
 		"function found_app_xupnpd() { return %d;}\n"
@@ -2419,7 +2419,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		found_app_vlmcsd,
 		found_app_napt66,
 		found_app_dnsforwarder,
-		found_app_shadowsocks,
+		found_app_trojan,
 		found_app_smartdns,
 		found_app_frp,
 		found_app_xupnpd,
@@ -4023,9 +4023,9 @@ struct ej_handler ej_handlers[] =
 	{ "mentohust_action", mentohust_action_hook},
 	{ "mentohust_status", mentohust_status_hook},
 #endif
-#if defined (APP_SHADOWSOCKS)
-	{ "shadowsocks_action", shadowsocks_action_hook},
-	{ "shadowsocks_status", shadowsocks_status_hook},
+#if defined (APP_TROJAN)
+	{ "trojan_action", trojan_action_hook},
+	{ "trojan_status", trojan_status_hook},
 	{ "rules_count", rules_count_hook},
 	{ "pdnsd_status", pdnsd_status_hook},
 #endif
@@ -4035,14 +4035,8 @@ struct ej_handler ej_handlers[] =
 #if defined (APP_SMARTDNS)
 	{ "smartdns_status", smartdns_status_hook},
 #endif
-#if defined (APP_FRP)
-	{ "frpc_status", frpc_status_hook},
-	{ "frps_status", frps_status_hook},
-#endif
 	{ "update_action", update_action_hook},
 	{ "openssl_util_hook", openssl_util_hook},
-	{ "openvpn_srv_cert_hook", openvpn_srv_cert_hook},
-	{ "openvpn_cli_cert_hook", openvpn_cli_cert_hook},
 	{ NULL, NULL }
 };
 

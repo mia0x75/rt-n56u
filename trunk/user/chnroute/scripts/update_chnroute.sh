@@ -20,6 +20,6 @@ mv -f /tmp/chinadns_chnroute.txt /etc/chinadns/chnroute.txt
 
 mtd_storage.sh save >/dev/null 2>&1
 
-[ -f /usr/bin/shadowsocks.sh ] && [ "$(nvram get ss_enable)" = "1" ] && /usr/bin/shadowsocks.sh restart >/dev/null 2>&1
+[ -f /usr/bin/trojan.sh ] && [ "$(nvram get ss_enable)" = "1" ] && /usr/bin/trojan.sh restart >/dev/null 2>&1
 
 logger -st "chnroute" "Update done"

@@ -831,52 +831,52 @@
 	};
 #endif
 
-#if defined(APP_SHADOWSOCKS)
-	struct variable variables_ShadowsocksConf[] = {
-			{"ss_enable","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"global_server","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"backup_server","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"udp_relay_server","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_threads","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_run_mode","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"pdnsd_enable","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"tunnel_forward","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_type","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_mode","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_server","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_server_port","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_key","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_method","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_udp","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_own","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_local_port","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_mtu","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_router_proxy","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_lower_port_only","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_timeout","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_protocol","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_proto_param","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_obfs","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"ss_obfs_param","",NULL, EVM_RESTART_SHADOWSOCKS|EVM_RESTART_SS_TUNNEL},
-			{"socks5_proxy","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"socks5_proxy_port","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_turn","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"lan_con","",NULL, EVM_RESTART_SHADOWSOCKS},
+#if defined(APP_TROJAN)
+	struct variable variables_TrojanConf[] = {
+			{"ss_enable","",NULL, EVM_RESTART_TROJAN},
+			{"global_server","",NULL, EVM_RESTART_TROJAN},
+			{"backup_server","",NULL, EVM_RESTART_TROJAN},
+			{"udp_relay_server","",NULL, EVM_RESTART_TROJAN},
+			{"ss_threads","",NULL, EVM_RESTART_TROJAN},
+			{"ss_run_mode","",NULL, EVM_RESTART_TROJAN},
+			{"pdnsd_enable","",NULL, EVM_RESTART_TROJAN},
+			{"tunnel_forward","",NULL, EVM_RESTART_TROJAN},
+			{"ss_type","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_mode","",NULL, EVM_RESTART_TROJAN},
+			{"ss_server","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_server_port","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_key","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_method","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_udp","",NULL, EVM_RESTART_TROJAN},
+			{"ss_own","",NULL, EVM_RESTART_TROJAN},
+			{"ss_local_port","",NULL, EVM_RESTART_TROJAN},
+			{"ss_mtu","",NULL, EVM_RESTART_TROJAN},
+			{"ss_router_proxy","",NULL, EVM_RESTART_TROJAN},
+			{"ss_lower_port_only","",NULL, EVM_RESTART_TROJAN},
+			{"ss_timeout","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_protocol","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_proto_param","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_obfs","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"ss_obfs_param","",NULL, EVM_RESTART_TROJAN|EVM_RESTART_SS_TUNNEL},
+			{"socks5_proxy","",NULL, EVM_RESTART_TROJAN},
+			{"socks5_proxy_port","",NULL, EVM_RESTART_TROJAN},
+			{"ss_turn","",NULL, EVM_RESTART_TROJAN},
+			{"lan_con","",NULL, EVM_RESTART_TROJAN},
 			{"ss_watchcat", "",NULL, FALSE},
-			{"ss_turn_s","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_turn_ss","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_update_chnroute","",NULL, EVM_RESTART_SHADOWSOCKS},
-			{"ss_update_gfwlist","",NULL, EVM_RESTART_SHADOWSOCKS},
+			{"ss_turn_s","",NULL, EVM_RESTART_TROJAN},
+			{"ss_turn_ss","",NULL, EVM_RESTART_TROJAN},
+			{"ss_update_chnroute","",NULL, EVM_RESTART_TROJAN},
+			{"ss_update_gfwlist","",NULL, EVM_RESTART_TROJAN},
 			{"ss-tunnel_enable","",NULL, EVM_RESTART_SS_TUNNEL},
 			{"ss-tunnel_local_port","",NULL, EVM_RESTART_SS_TUNNEL},
 			{"ss-tunnel_remote","",NULL, EVM_RESTART_SS_TUNNEL},
 			{"ss-tunnel_mtu","",NULL, EVM_RESTART_SS_TUNNEL},
-			{"scripts.ss_dom.sh", "File", NULL, EVM_RESTART_SHADOWSOCKS},
-			{"scripts.ss_ip.sh", "File", NULL, EVM_RESTART_SHADOWSOCKS},
-			{"scripts.ss_lan_ip.sh", "File", NULL, EVM_RESTART_SHADOWSOCKS},
-			{"scripts.ss_lan_bip.sh", "File", NULL, EVM_RESTART_SHADOWSOCKS},
-			{"scripts.ss_wan_ip.sh", "File", NULL, EVM_RESTART_SHADOWSOCKS},
-			{"SspList", "Group", ARGV((char*)variables_SspConf_SspList, "8", "55", "ssp_staticnum_x"), EVM_RESTART_SHADOWSOCKS},
+			{"scripts.ss_dom.sh", "File", NULL, EVM_RESTART_TROJAN},
+			{"scripts.ss_ip.sh", "File", NULL, EVM_RESTART_TROJAN},
+			{"scripts.ss_lan_ip.sh", "File", NULL, EVM_RESTART_TROJAN},
+			{"scripts.ss_lan_bip.sh", "File", NULL, EVM_RESTART_TROJAN},
+			{"scripts.ss_wan_ip.sh", "File", NULL, EVM_RESTART_TROJAN},
+			{"SspList", "Group", ARGV((char*)variables_SspConf_SspList, "8", "55", "ssp_staticnum_x"), EVM_RESTART_TROJAN},
 			{0,0,0,0}
 	};
 #endif
@@ -1048,8 +1048,8 @@
 #if defined(APP_MENTOHUST)
 		{"mentohustConf",		variables_mentohustConf},
 #endif
-#if defined(APP_SHADOWSOCKS)
-		{"ShadowsocksConf",		variables_ShadowsocksConf},
+#if defined(APP_TROJAN)
+		{"TrojanConf",			variables_TrojanConf},
 #endif
 #if defined(APP_SMARTDNS)
 		{"SmartdnsConf",		variables_SmartdnsConf},
@@ -1131,8 +1131,8 @@
 #if defined(APP_FRP)
 		{EVM_RESTART_FRP,		EVT_RESTART_FRP,		RCN_RESTART_FRP, 0},
 #endif
-#if defined(APP_SHADOWSOCKS)
-		{EVM_RESTART_SHADOWSOCKS,	EVT_RESTART_SHADOWSOCKS,	RCN_RESTART_SHADOWSOCKS,  0},
+#if defined(APP_TROJAN)
+		{EVM_RESTART_TROJAN,		EVT_RESTART_TROJAN,		RCN_RESTART_TROJAN,  0},
 		{EVM_RESTART_SS_TUNNEL,		EVT_RESTART_SS_TUNNEL,		RCN_RESTART_SS_TUNNEL,	  0},
 #endif
 #if defined(APP_SMARTDNS)

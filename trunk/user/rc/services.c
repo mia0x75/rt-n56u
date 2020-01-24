@@ -279,15 +279,15 @@ void restart_ttyd(void){
 }
 #endif
 
-#if defined(APP_SHADOWSOCKS)
+#if defined(APP_TROJAN)
 void stop_ss(void){
-	eval("/usr/bin/shadowsocks.sh","stop");
+	eval("/usr/bin/trojan.sh","stop");
 }
 
 void start_ss(void){
 	int ss_enable = nvram_get_int("ss_enable");
 	if ( ss_enable == 1)
-		eval("/usr/bin/shadowsocks.sh","start");
+		eval("/usr/bin/trojan.sh","start");
 }
 
 void restart_ss(void){
@@ -604,7 +604,7 @@ start_services_once(int is_ap_mode)
 #if defined(APP_DNSFORWARDER)
 	start_dnsforwarder();
 #endif
-#if defined(APP_SHADOWSOCKS)
+#if defined(APP_TROJAN)
 	start_ss();
 	start_ss_tunnel();
 #endif
@@ -660,7 +660,7 @@ stop_services(int stopall)
 #if defined(APP_FRP)
 	stop_frp();
 #endif
-#if defined(APP_SHADOWSOCKS)
+#if defined(APP_TROJAN)
 	stop_ss();
 	stop_ss_tunnel();
 #endif

@@ -33,9 +33,9 @@ function Callback(){
 </head>
 
 <body onLoad="Callback();">
-<% shadowsocks_action(); %>
+<% trojan_action(); %>
 
-<form method="post" name="redirectForm" action="/Shadowsocks.asp" target="_self">
+<form method="post" name="redirectForm" action="/Trojan.asp" target="_self">
 </form>
 
 </body>

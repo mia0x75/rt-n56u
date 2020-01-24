@@ -133,7 +133,7 @@ endif
 dir_$(CONFIG_FIRMWARE_INCLUDE_TTYD)		+= ttyd
 dir_$(CONFIG_FIRMWARE_INCLUDE_VLMCSD)		+= vlmcsd
 dir_$(CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER)	+= dns-forwarder
-dir_y                                           += trojan
+dir_$(CONFIG_FIRMWARE_INCLUDE_TROJAN)		+= trojan
 dir_$(CONFIG_FIRMWARE_INCLUDE_LRZSZ)		+= lrzsz
 dir_$(CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM)	+= gdut-drcom
 dir_$(CONFIG_FIRMWARE_INCLUDE_DOGCOM)		+= dogcom
