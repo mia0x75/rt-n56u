@@ -509,9 +509,9 @@ void start_ttyd(void);
 void restart_ttyd(void);
 #endif
 #if defined(APP_TROJAN)
-void stop_ss(void);
-void start_ss(void);
-void restart_ss(void);
+void stop_trojan(void);
+void start_trojan(void);
+void restart_trojan(void);
 void stop_ss_tunnel(void);
 void start_ss_tunnel(void);
 void restart_ss_tunnel(void);

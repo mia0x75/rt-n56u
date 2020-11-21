@@ -2593,23 +2593,6 @@ openssl_util_hook(int eid, webs_t wp, int argc, char **argv)
 	return 0;
 }
 
-static int
-openvpn_srv_cert_hook(int eid, webs_t wp, int argc, char **argv)
-{
-	int has_found_cert = 0;
-	websWrite(wp, "function openvpn_srv_cert_found() { return %d;}\n", has_found_cert);
-
-	return 0;
-}
-
-static int openvpn_cli_cert_hook(int eid, webs_t wp, int argc, char **argv)
-{
-	int has_found_cert = 0;
-	websWrite(wp, "function openvpn_cli_cert_found() { return %d;}\n", has_found_cert);
-
-	return 0;
-}
-
 static int ej_get_parameter(int eid, webs_t wp, int argc, char **argv) {
 	int ret = 0;
 
