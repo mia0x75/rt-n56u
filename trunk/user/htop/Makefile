@@ -1,5 +1,5 @@
-SRC_NAME = htop-2.2.0
-SRC_URL = https://hisham.hm/htop/releases/2.2.0/htop-2.2.0.tar.gz
+SRC_NAME = htop-3.0.5
+SRC_URL = https://github.com/htop-dev/htop/archive/3.0.5.zip
 THISDIR = $(shell pwd)
 
 all: download_test extract_test config_test
@@ -7,12 +7,12 @@ all: download_test extract_test config_test
 
 download_test:
 	( if [ ! -f $(SRC_NAME).tar.gz ]; then \
-		wget -t5 --timeout=20 --no-check-certificate -O $(SRC_NAME).tar.gz $(SRC_URL); \
+		wget -t5 --timeout=20 --no-check-certificate -O $(SRC_NAME).zip $(SRC_URL); \
 	fi )
 
 extract_test:
 	( if [ ! -d $(SRC_NAME) ]; then \
-		tar zxf $(SRC_NAME).tar.gz; \
+		unzip -qq $(SRC_NAME).zip; \
 	fi )
 
 config_test:
@@ -24,6 +24,7 @@ config_test:
 
 configure:
 	( cd $(SRC_NAME) ; \
+	sh autogen.sh; \
 	./configure \
 		--prefix=/usr \
 		--enable-unicode \
@@ -38,7 +39,7 @@ clean:
 	fi ; \
 	rm -f config_done
 	rm -f wget-log
-	rm -f $(SRC_NAME).tar.gz
+	rm -f $(SRC_NAME).zip
 	rm -rf $(SRC_NAME)
 
 romfs:

@@ -3,7 +3,7 @@ SRC_NAME = vlmcsd-svn1113
 SRC_URL = https://github.com/hanwckf/rt-n56u/raw/master/trunk/user/vlmcsd/vlmcsd-svn1113.tar.gz
 
 all: download_test extract_test
-	$(MAKE) -C $(SRC_NAME) vlmcsd CC=$(CONFIG_CROSS_COMPILER_ROOT)/bin/mipsel-linux-uclibc-gcc
+	$(MAKE) -C $(SRC_NAME) vlmcsd SAFE_MODE=1 CC=$(CONFIG_CROSS_COMPILER_ROOT)/bin/mipsel-linux-uclibc-gcc
 	
 download_test: 
 	( if [ ! -f $(THISDIR)/$(SRC_NAME).tar.gz ]; then \
