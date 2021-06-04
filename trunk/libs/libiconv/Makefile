@@ -4,9 +4,9 @@ all: extract_test config_test
 	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)
 
 extract_test:
-        ( if [ ! -d $(SRC_NAME) ]; then \
-                unzip -qq $(SRC_NAME).zip ; \
-        fi )
+	( if [ ! -d $(SRC_NAME) ]; then \
+		unzip -qq $(SRC_NAME).zip ; \
+	fi )
 
 config_test:
 	( if [ -f ./config_done ]; then \
