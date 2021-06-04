@@ -1,5 +1,5 @@
 SRC_NAME = trojan
-VERSION = 1.14.0
+VERSION = 1.16.0
 THISDIR = $(shell pwd)
 TROJAN_DIR = $(SRC_NAME)-$(VERSION)
 TROJAN_NAME = $(SRC_NAME)-$(VERSION)-linux-mipsel.tar.gz

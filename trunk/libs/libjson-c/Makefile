@@ -1,5 +1,5 @@
-SRC_NAME=json-c-master
-SRC_URL=https://github.com/json-c/json-c/archive/master.zip
+SRC_NAME=json-c-json-c-0.13.1-20180305
+SRC_URL=https://github.com/json-c/json-c/archive/json-c-0.13.1-20180305.zip
 
 all: download_test extract_test config_test
 	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)

@@ -1,7 +1,12 @@
 SRC_NAME="libiconv-1.16"
 
-all: config_test
+all: extract_test config_test
 	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)
+
+extract_test:
+        ( if [ ! -d $(SRC_NAME) ]; then \
+                unzip -qq $(SRC_NAME).zip ; \
+        fi )
 
 config_test:
 	( if [ -f ./config_done ]; then \
@@ -27,6 +32,7 @@ clean:
 	if [ -f $(SRC_NAME)/Makefile ] ; then \
 		$(MAKE) -C $(SRC_NAME) clean ; \
 	fi ; \
+	rm -rf $(SRC_NAME)
 	rm -f config_done
 
 install:

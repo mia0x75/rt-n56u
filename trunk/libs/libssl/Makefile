@@ -1,4 +1,5 @@
-SRC_NAME=openssl-1.1.1
+SRC_NAME=openssl-1.1.1k
+SRC_URL=https://www.openssl.org/source/$(SRC_NAME).tar.gz
 
 # openssl use CROSS_COMPILE prefix
 CC=gcc $(CPUFLAGS)
@@ -12,6 +13,9 @@ COPTS+=-DOPENSSL_SMALL_FOOTPRINT
 COPTS+=-DOPENSSL_PREFER_CHACHA_OVER_GCM
 
 LOPTS=-Wl,--gc-sections -L$(DESTDIR)/lib
+
+CFLAGS := $(COPTS)
+CXXFLAGS := $(COPTS)
 
 OPENSSL_OPTIONS = no-capieng no-cms no-rfc3779 no-seed no-async \
                   no-ec2m no-err no-idea no-rc5 no-rmd160 no-blake2 \
@@ -36,8 +40,19 @@ ifeq (,$(filter y,$(CONFIG_FIRMWARE_INCLUDE_OPENSSL_EC) $(CONFIG_FIRMWARE_INCLUD
 OPENSSL_OPTIONS += no-ec
 endif
 
-all: config_test
+all: download_test extract_test config_test
 	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)
+
+download_test:
+	( if [ ! -f $(SRC_NAME).tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O $(SRC_NAME).tar.gz $(SRC_URL); \
+	fi )
+
+extract_test:
+	( if [ ! -d $(SRC_NAME) ]; then \
+		tar -xf $(SRC_NAME).tar.gz; \
+		patch -d $(SRC_NAME) -p1 < $(SRC_NAME).patch; \
+	fi )
 
 config_test:
 	( if [ -f ./config_done ]; then \
@@ -49,11 +64,10 @@ config_test:
 configure:
 	( cd $(SRC_NAME) ; \
 	./Configure \
-		linux-mips32el \
+		linux-mips32 \
 		shared \
 		--prefix=/ \
 		--openssldir=/etc/ssl \
-		$(COPTS) \
 		$(LOPTS) \
 		$(OPENSSL_OPTIONS) ; \
 	)

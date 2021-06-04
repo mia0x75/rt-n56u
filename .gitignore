@@ -31,7 +31,6 @@ stamp-h1
 /trunk/libs/mbedtls/mbedtls-2*
 /trunk/libs/libcurl/curl-7.68*
 /trunk/libs/libmnl/libmnl*
-/trunk/libs/libncurses/ncurses*
 /trunk/libs/libpcap/libpcap*
 /trunk/libs/libssl/openssl-*
 /trunk/libs/libwebsockets/libwebsockets-*

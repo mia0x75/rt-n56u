@@ -34,6 +34,7 @@ all:
 romfs:
 	$(STRIP) $(DESTDIR)/bin/ldd ; \
 	$(STRIP) $(DESTDIR)/sbin/ldconfig ; \
+	upx --best $(DESTDIR)/bin/ldd; \
 	cp -fP $(DESTDIR)/bin/ldd $(ROMFSDIR)/bin ; \
 	cp -fP $(DESTDIR)/lib/libuClibc*.so* $(ROMFSDIR)/lib ; \
 	cp -fP $(DESTDIR)/lib/libc.so.0 $(ROMFSDIR)/lib ; \

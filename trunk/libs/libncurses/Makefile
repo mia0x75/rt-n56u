@@ -1,12 +1,18 @@
-SRC_NAME=ncurses-6.1
-SRC_URL=https://github.com/mirror/ncurses/archive/v6.1.zip
+SRC_NAME=ncurses-6.2
+SRC_URL=https://github.com/mirror/ncurses/archive/v6.2.zip
 
-all: download_test config_test
+all: download_test extract_test config_test
 	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)
 
 download_test:
+	( if [ ! -f $(SRC_NAME).zip ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O $(SRC_NAME).zip $(SRC_URL); \
+	fi )
+
+extract_test:
 	( if [ ! -d $(SRC_NAME) ]; then \
-		git clone https://github.com/mirror/ncurses $(SRC_NAME) ; \
+		unzip -qq $(SRC_NAME).zip ; \
+		patch -p1 -d $(SRC_NAME) < $(SRC_NAME).patch ; \
 	fi )
 
 config_test:
@@ -20,6 +26,8 @@ configure:
 	( cd $(SRC_NAME) ; \
 	./configure \
 		--prefix=$(STAGEDIR) \
+		--with-install-prefix=$(STAGEDIR) \
+		--without-termlib \
 		--without-ada \
 		--without-progs \
 		--without-tests \
@@ -42,6 +50,7 @@ clean:
 	fi ; \
 	rm -f config_done
 	rm -rf $(SRC_NAME)
+	rm -rf $(SRC_NAME).zip
 
 install:
 	$(MAKE) -C $(SRC_NAME) install DESTDIR=""

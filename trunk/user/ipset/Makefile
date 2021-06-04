@@ -4,9 +4,14 @@ THISDIR = $(shell pwd)
 
 CFLAGS += -fvisibility=hidden
 
-all: config_test
+all: extract_test config_test
 	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)
 	$(MAKE) modules -j$(HOST_NCPU) -C $(SRC_NAME)
+
+extract_test:
+	( if [ ! -d $(SRC_NAME) ]; then \
+		unzip -qq $(SRC_NAME).zip ; \
+	fi )
 
 config_test:
 	( if [ -f ./config_done ]; then \
@@ -36,6 +41,7 @@ clean:
 		$(MAKE) -C $(SRC_NAME) modules_clean ; \
 		$(MAKE) -C $(SRC_NAME) distclean ; \
 	fi ; \
+	rm -rf $(SRC_NAME)
 	rm -f config_done
 
 romfs:
