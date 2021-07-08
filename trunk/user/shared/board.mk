@@ -1,8 +1,8 @@
 ##################################################################
 # Board PID # Board Name       # PRODUCT # Note
 ##################################################################
-# K2P       # K2P              # MT7621  #
+# NEWIFI3   # NEWIFI3          # MT7621  #
 ##################################################################
 
-CFLAGS += -DBOARD_K2P -DBOARD_MT7615_DBDC
-BOARD_NUM_USB_PORTS=0
+CFLAGS += -DBOARD_NEWIFI3
+BOARD_NUM_USB_PORTS=1

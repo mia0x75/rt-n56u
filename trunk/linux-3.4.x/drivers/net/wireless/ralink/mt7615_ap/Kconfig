@@ -16,7 +16,7 @@ config WDS_SUPPORT
 
 config WIFI_EAP_FEATURE
 	bool "EAP Feature"
-	depends on WIFI_DRIVER
+    depends on WIFI_DRIVER
 	default y
 
 config VLAN_SUPPORT
@@ -151,10 +151,10 @@ config OFFCHANNEL_SCAN_FEATURE
         default n
 
 config OCE_SUPPORT
-	bool "Optimized Connectivity Experience Support"
-	depends on MT_AP_SUPPORT
-	depends on CHIP_MT7615E
-	default y
+    bool "Optimized Connectivity Experience Support"
+    depends on MT_AP_SUPPORT
+    depends on CHIP_MT7615E
+    default y
 
 config DPP_FEATURE
 	bool "DPP Support"
