@@ -1,7 +1,7 @@
 SRC_NAME=libmnl-1.0.4
 SRC_URL=http://www.netfilter.org/projects/libmnl/files/$(SRC_NAME).tar.bz2
 
-all: download_test extract_test config_test
+all: extract_test config_test
 	$(MAKE) -C $(SRC_NAME)
 
 download_test:
@@ -37,7 +37,6 @@ clean:
 	fi ; \
 	rm -f config_done
 	rm -f wget-log
-	rm -f $(SRC_NAME).tar.bz2
 	rm -rf $(SRC_NAME)
 
 install:

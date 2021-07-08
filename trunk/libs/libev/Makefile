@@ -1,4 +1,4 @@
-SRC_NAME=libev-4.31
+SRC_NAME=libev-4.33
 SRC_URL=http://dist.schmorp.de/libev/$(SRC_NAME).tar.gz
 
 all: download_test extract_test config_test

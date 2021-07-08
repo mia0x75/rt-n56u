@@ -70,6 +70,9 @@ char rt2880_cmdline[] = CONFIG_CMDLINE;
 #define MTD_ROOTFS_DEV  "/dev/ram0"
 #endif
 
+char rt2880_cmdline[]="console=ttyS0," TTY_BAUDRATE "" MTD_UBI_MTD " root=" MTD_ROOTFS_DEV "";
+#endif
+
 #if 0 /*ifdef CONFIG_UBOOT_CMDLINE*/
 extern int prom_argc;
 extern int *_prom_argv;
