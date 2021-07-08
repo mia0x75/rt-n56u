@@ -1,24 +1,50 @@
-SRC_NAME = trojan
-VERSION = 1.16.0
+SRC_NAME = trojan-1.16.0
+SRC_URL = https://github.com/trojan-gfw/trojan/archive/v1.16.0.tar.gz
 THISDIR = $(shell pwd)
-TROJAN_DIR = $(SRC_NAME)-$(VERSION)
-TROJAN_NAME = $(SRC_NAME)-$(VERSION)-linux-mipsel.tar.gz
-TROJAN_URL = https://github.com/maskedeken/trojan-gfw/releases/download/$(VERSION)/$(TROJAN_NAME)
 
-all: download_test extra_test
-	@echo "trojan build done!"
+LDFLAGS += -static-libstdc++
+COPTS = -O3 $(filter-out -O%,$(CXXFLAGS))
+CFLAGS := $(COPTS)
+CXXFLAGS := $(COPTS)
+
+all: download_test extract_test config_test
+	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)/build
 
 download_test:
-	( if [ ! -f $(TROJAN_NAME) ]; then \
-		wget -t5 --timeout=20 --no-check-certificate -O $(TROJAN_NAME) $(TROJAN_URL); \
+	( if [ ! -f $(THISDIR)/$(SRC_NAME).tar.gz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O $(SRC_NAME).tar.gz $(SRC_URL); \
 	fi )
 
-extra_test:
-	( if [ ! -f $(SRC_NAME) ]; then \
-		tar xf $(TROJAN_NAME); \
+extract_test:
+	( if [ ! -d $(THISDIR)/$(SRC_NAME) ]; then \
+		tar -xf $(SRC_NAME).tar.gz; \
 	fi )
+
+config_test:
+	( if [ -f ./config_done ]; then \
+		echo "the same configuration"; \
+	else \
+		make configure && touch config_done; \
+	fi )
+
+configure:
+	( mkdir -p $(SRC_NAME)/build && cd $(SRC_NAME)/build ; \
+		cmake \
+			-DCMAKE_TOOLCHAIN_FILE=../../cross-mipsel-linux.cmake \
+			-DBoost_USE_STATIC_LIBS=ON \
+			-DENABLE_MYSQL=OFF \
+			-DENABLE_REUSE_PORT=ON \
+			-DSYSTEMD_SERVICE=OFF \
+			.. ; \
+	)
 
 clean:
+	rm -rf $(SRC_NAME)/build
+	rm -f config_done
+	rm -f wget-log
+	rm -f $(SRC_NAME).tar.gz
+	rm -rf $(SRC_NAME)
 
 romfs:
-	$(ROMFSINST) -p +x $(THISDIR)/trojan /usr/bin/trojan
+	$(ROMFSINST) $(THISDIR)/$(SRC_NAME)/build/trojan /usr/bin/trojan
+

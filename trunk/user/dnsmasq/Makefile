@@ -19,7 +19,6 @@ clean:
 	rm -f dnsmasq
 
 romfs:
-	cp $(SRC_NAME)/src/dnsmasq .
-	$(STRIP) dnsmasq
-	upx --best dnsmasq
+	$(STRIP) $(SRC_NAME)/src/dnsmasq
+	upx --best $(SRC_NAME)/src/dnsmasq
 	$(ROMFSINST) -p +x /usr/sbin/dnsmasq

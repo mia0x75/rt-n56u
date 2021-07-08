@@ -33,6 +33,7 @@ LIBS_INCLUDE_LIBPCAP=n
 LIBS_INCLUDE_LIBUV=n
 LIBS_INCLUDE_LIBWEBSOCKETS=n
 LIBS_INCLUDE_LIBEVENT=n
+LIBS_INCLUDE_BOOST=n
 LIBS_INCLUDE_MEDIA=n
 LIBS_INCLUDE_CURL=n
 LIBS_INCLUDE_NCURSES=n
@@ -188,6 +189,11 @@ $(echo ${LIBS_INCLUDE_LIBSODIUM} '1.---------------------------------------')
 LIBS_INCLUDE_LIBSODIUM=y	
 endif
 
+ifneq ($(filter y,$(CONFIG_FIRMWARE_INCLUDE_WING) $(CONFIG_FIRMWARE_INCLUDE_TROJAN)),)
+LIBS_INCLUDE_BOOST=y
+LIBS_INCLUDE_LIBSSL=y
+endif
+
 dir_y						+= libz
 dir_$(LIBS_INCLUDE_NCURSES)			+= libncurses
 dir_$(LIBS_INCLUDE_LIBLZO)			+= liblzo
@@ -206,6 +212,7 @@ dir_$(LIBS_INCLUDE_LIBSODIUM)			+= libsodium
 dir_$(LIBS_INCLUDE_LIBUDNS)			+= libudns
 dir_$(LIBS_INCLUDE_MBEDTLS)			+= mbedtls
 dir_$(LIBS_INCLUDE_CURL)			+= libcurl
+dir_$(LIBS_INCLUDE_BOOST)			+= boost
 dir_y						+= libnfnetlink
 # ipset shared libs
 ifneq ($(CONFIG_WITHOUT_KERNEL),y)

@@ -1,5 +1,5 @@
-SRC_NAME=curl-7.68.0
-SRC_URL=https://github.com/curl/curl/releases/download/curl-7_68_0/curl-7.68.0.tar.xz
+SRC_NAME=curl-7.75.0
+SRC_URL=https://github.com/curl/curl/releases/download/curl-7_75_0/curl-7.75.0.tar.xz
 
 LDFLAGS += -Wl,-rpath-link=$(STAGEDIR)/lib
 
@@ -56,7 +56,6 @@ configure:
 		--without-libssh2 \
 		--without-krb4 \
 		--without-nss \
-		--without-ssl \
 		--with-random=/dev/urandom \
 		--with-zlib=$(STAGEDIR) \
 		--with-ssl=$(STAGEDIR) \
@@ -66,7 +65,7 @@ configure:
 
 clean:
 	if [ -f $(SRC_NAME)/Makefile ] ; then \
-		$(MAKE) -C $(SRC_NAME) distclean ; \
+		$(MAKE) -C $(SRC_NAME) clean ; \
 	fi ; \
 	rm -f config_done
 	rm -f $(SRC_NAME).tar.xz
