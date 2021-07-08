@@ -84,3 +84,5 @@ GTAGS
 *.orig
 *~
 \#*#
+
+drivers/net/wireless/ralink/mt7615

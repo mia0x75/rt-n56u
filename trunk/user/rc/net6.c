@@ -146,6 +146,9 @@ void full_restart_ipv6(int ipv6_type_old)
 		stop_lltd();
 		stop_httpd();
 	}
+#if defined (APP_NFSD)
+	stop_nfsd();
+#endif
 
 	stop_upnp();
 	stop_dhcp6c();
@@ -174,6 +177,9 @@ void full_restart_ipv6(int ipv6_type_old)
 		if (!is_dns_dhcpd_run())
 			start_dns_dhcpd(0);
 	}
+#if defined (APP_NFSD)
+	run_nfsd();
+#endif
 
 	if (ipv6_toggled) {
 		start_httpd(0);

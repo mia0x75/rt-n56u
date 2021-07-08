@@ -2,17 +2,14 @@ SRC_NAME=openssl-1.1.1k
 SRC_URL=https://www.openssl.org/source/$(SRC_NAME).tar.gz
 
 # openssl use CROSS_COMPILE prefix
-CC=gcc $(CPUFLAGS)
-CXX=g++ $(CPUFLAGS)
+CC=gcc
+CXX=g++
 AR=ar
 RANLIB=ranlib
 
-COPTS=$(CFLAGS) -Os
-COPTS+=$(if $(CONFIG_IPV6),-DOPENSSL_USE_IPV6=1,)
-COPTS+=-DOPENSSL_SMALL_FOOTPRINT
-COPTS+=-DOPENSSL_PREFER_CHACHA_OVER_GCM
-
-LOPTS=-Wl,--gc-sections -L$(DESTDIR)/lib
+COPTS = $(CPUFLAGS) -O3 $(filter-out -O%, $(CFLAGS))
+COPTS += $(if $(CONFIG_IPV6),-DOPENSSL_USE_IPV6=1,)
+COPTS += -DOPENSSL_SMALL_FOOTPRINT
 
 CFLAGS := $(COPTS)
 CXXFLAGS := $(COPTS)

@@ -6,7 +6,7 @@ LDFLAGS  += -Wl,--gc-sections
 THISDIR = $(shell pwd)
 
 all: download_test extract_test config_test
-	$(MAKE) -C $(SRC_NAME) && \
+	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME) && \
 	$(MAKE) -C $(SRC_NAME) install DESTDIR=$(THISDIR)/install
 
 download_test:
@@ -46,7 +46,7 @@ configure:
 		OPENSSL_CFLAGS="-I$(STAGEDIR)/include" \
 		OPENSSL_LIBS="-L$(STAGEDIR)/lib -lssl -lcrypto" \
 		LIBCURL_CFLAGS="-I$(STAGEDIR)/include" \
-		LIBCURL_LIBS="-L$(STAGEDIR)/lib -lcurl" \
+		LIBCURL_LIBS="-L$(STAGEDIR)/lib -lcurl -Wl,-rpath-link=$(STAGEDIR)/lib" \
 		LIBEVENT_CFLAGS="-I$(STAGEDIR)/include" \
 		LIBEVENT_LIBS="-L$(STAGEDIR)/lib -levent" \
 		--host=$(HOST_TARGET) \
